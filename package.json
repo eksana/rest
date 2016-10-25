@@ -26,6 +26,7 @@
     "gulp-cssnano": "^2.1.2",
     "gulp-imagemin": "^3.0.3",
     "gulp-rename": "^1.2.2",
+    "gulp-rigger": "^0.5.8",
     "gulp-scss": "^1.4.0",
     "gulp-uglifyjs": "^0.6.2",
     "imagemin-pngquant": "^5.0.0"

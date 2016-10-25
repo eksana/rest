@@ -6,10 +6,11 @@ var gulp = require('gulp'),
  	cssnano  = require('gulp-cssnano'), // Подключаем пакет для минификации CSS
     rename = require('gulp-rename'), // Подключаем библиотеку для переименования файлов
     del  = require('del'), // Подключаем библиотеку для удаления файлов и папок
-    imagemin    = require('gulp-imagemin'), // Подключаем библиотеку для работы с изображениями
-    pngquant    = require('imagemin-pngquant'), // Подключаем библиотеку для работы с png
-    cache       = require('gulp-cache'), // Подключаем библиотеку кеширования
-    autoprefixer = require('gulp-autoprefixer');// Подключаем библиотеку для автоматического добавления префиксов
+    imagemin = require('gulp-imagemin'), // Подключаем библиотеку для работы с изображениями
+    pngquant = require('imagemin-pngquant'), // Подключаем библиотеку для работы с png
+    cache  = require('gulp-cache'), // Подключаем библиотеку кеширования
+    autoprefixer = require('gulp-autoprefixer'),// Подключаем библиотеку для автоматического добавления префиксов
+	 rigger = require('gulp-rigger');
 
 
 
@@ -41,6 +42,8 @@ gulp.task('scripts', function() {
 		.pipe(gulp.dest('app/js')); // Выгружаем в папку app/js
 	});
 
+
+
 gulp.task('css-libs', ['scss'], function() {
     return gulp.src('app/css/main.css') // Выбираем файл для минификации
         .pipe(cssnano()) // Сжимаем
@@ -55,9 +58,9 @@ gulp.task('watch', ['browser-sync', 'scss','scripts'], function() {
 });
 
 
-gulp.task('clean', function() {
+/*gulp.task('clean', function() {
     return del.sync('dist'); // Удаляем папку dist перед сборкой
-});
+});*/
 
 
 gulp.task('img', function() {
@@ -71,7 +74,14 @@ gulp.task('img', function() {
         .pipe(gulp.dest('dist/img')); // Выгружаем на продакшен
     });
 
-gulp.task('build', ['clean', 'img', 'scss', 'scripts'], function() {
+/*gulp.task('section', function () {
+    gulp.src('app/*.html')
+        .pipe(rigger())
+        .pipe(gulp.dest('dist/'))
+});*/
+
+
+gulp.task('build', ['img', 'scss','scripts','css-libs'], function() {
 
     var buildCss = gulp.src([ // Переносим библиотеки в продакшен
     	'app/css/main.min.css',
